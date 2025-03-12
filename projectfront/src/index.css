@@ -1,0 +1,36 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&family=Playwrite+HU:wght@100..400&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+*{
+  padding: 0px;
+  outline: 0;
+  text-decoration: none;
+  margin: 0px;
+  box-sizing: border-box;
+}
+/*https://bootstrapmade.com/demo/eStore/*/
+:root{
+   --background-color: rgb(247, 247, 247);
+   --primary-color: rgb(51, 51, 214);
+   --text-color: rgb(92, 89, 89);
+   --header-color: rgb(39, 39, 39);
+   --pure-black:rgb(15, 15, 15);
+   --white-color: rgb(255, 255, 255);
+   --hover-color: rgb(190, 192, 219);
+   --gray: rgb(218, 216, 216);
+   --light-gray:rgb(206, 205, 205);
+   --dark-blue: rgb(12, 12, 100);
+   --gold:rgb(255, 217, 0);
+   --box-shadow: 0px 0px 6px 1px rgba(10,10,100,.2)
+}
+body{
+  background-color: var(--background-color);
+  font-family: "Poppins", sans-serif;
+}
+.container{
+  display: flex;
+  padding-inline: 3rem;
+  padding-block: 1rem;
+   align-items: center;
+  justify-content: space-between;
+
+}

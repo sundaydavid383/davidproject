@@ -1,0 +1,144 @@
+.nav {
+  display: flex;
+  flex-direction: column;
+  height: 5rem;
+  width: 100%;
+  justify-content: space-between;
+  padding: 0.2rem 1rem;
+  padding-inline: 2rem;
+  /* box-shadow: var(--box-shadow); */
+}
+.nav .navupper {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--text-color);
+  padding-block: 1rem;
+}
+ .logo {
+  display: flex;
+  gap: 0.5rem;
+  font-size: 1.5rem;
+  color: var(--primary-color);
+  align-items: flex-end;
+  font-weight: 700;
+  position: relative;
+  justify-content: space-around;
+}
+ .logo span {
+  font-family: "Dancing Script", cursive;
+  margin-right: -0.5rem;
+  margin-bottom: -0.021rem;
+  font-size: 2.4rem;
+  font-weight: 400;
+}
+ .logo i {
+  margin-bottom: 0.5rem;
+}
+ form {
+  display: flex;
+  box-shadow: var(--box-shadow);
+  border-radius: 1.4rem;
+  border: 1px solid var(--light-black);
+  padding: 0.5rem;
+  background-color: var(--white-color);
+  height: 3.6rem;
+
+  justify-content: space-between;
+  align-items: center;
+  width: 40%;
+}
+ form input {
+  width: 70%;
+  border: 0;
+  outline: 0;
+  font-size: 1.1rem;
+  font-weight: 100;
+  text-transform: capitalize;
+  color: var(--text-color);
+}
+ form button {
+  background: var(--primary-color);
+  border: 0;
+  outline: 0;
+  width: 5rem;
+  height: 2.5rem;
+  border-radius: 1rem;
+  color: var(--white-color);
+  cursor: pointer;
+  transition: 0.2s;
+  box-shadow: var(--box-shadow);
+}
+
+.icons {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+
+}
+.icons .icon{
+    display: flex;
+    position: relative;
+    color: var(--white-color);
+    font-size: 1.2rem;
+    background: var(--primary-color);
+    border-radius: 50%;
+    padding: .7rem;
+    box-shadow: var(--box-shadow);
+    cursor: pointer;
+    transition: .2s;
+}
+.nav .navupper form button:hover,
+.icons .icon:hover{
+    color: var(--primary-color);
+    background: var(--white-color);
+}
+.icons .icon span{
+    position: absolute;
+    top: -.6rem;
+    right:-.2rem;
+    font-size: .8rem;
+    height: 1rem;
+    text-align: center;
+    width: 1rem;
+    border-radius: 50%;
+    color: var(--pure-black);
+    font-weight: 600;
+    background: var(--gold);
+}
+.icons .icon:hover span{
+    color: var(--white-color);
+}
+.navlower{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding-block: 1rem;
+    font-size: 1rem;
+    font-weight: 400;
+    text-align: center;
+    border-bottom: 1px solid var(--text-color);
+}
+.navlower a{
+    color: var(--text-color);
+    transition: .2s linear;
+    position: relative;
+}
+.navlower a:hover{
+    color: var(--primary-color);
+  
+}
+.navlower a span{
+   height: .3rem;
+   width: 0%;
+   transition: .2s linear;
+   background: var(--primary-color);
+   border-radius: .7rem;
+   position: absolute;
+   top:1.6rem;
+   left: 0rem;
+}
+.navlower a:hover span{
+    width: 100%;
+}
