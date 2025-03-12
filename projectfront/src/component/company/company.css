@@ -44,9 +44,17 @@
     gap:2rem;
 }
 .company_content .card img{
-    width: 50%;
+    width: 100%;
+    transition: .3s;
     border-radius: 1rem;
     box-shadow: var(--box-shadow);
+}
+.company_content .card img:hover{
+    transform: scale(1.1);
+}
+.company_content .companyImage{
+    width: 50%;
+   overflow: hidden;
 }
 .company_content .card .text{
     display: flex;
@@ -118,6 +126,36 @@
 }
 .company_content form{
     margin: auto;
+}
+.sort{
+    background: var(--white-color);
+    padding: .8rem;
+    width: 12rem;
+    text-align: center;
+    box-shadow: var(--box-shadow);
+    border-radius: 1rem;
+}
+.sort span{
+    display: flex;
+    font-size: 1.1rem;
+    justify-content: space-between;
+    align-items: center;
+    padding: .5rem .2rem;
+    cursor: pointer;
+    border-radius: .5rem;
+    color: var(--text-color);
+    padding-inline: .6rem;
+    transition: .2s linear;
+}
+.sort span:hover{
+    background: var(--primary-color);
+
+    color: var(--white-color);
+}
+
+.sort span i{
+    color: var(--gold);
+    font-size: 1.4rem;
 }
 .noresult{
     display: flex;
@@ -206,13 +244,13 @@
 
 }
 .loading .card .image::after{
-    animation: loading 3s 1.4s infinite;
+    animation: loading 3s .4s infinite;
 }
 .loading .card .stars .star::after{
-    animation: loading 5s .3s infinite;
+    animation: loading 5s .1s infinite;
 }
 .loading .card .line::after{
-    animation: loading 2.7s 1s infinite;
+    animation: loading 2.7s .2s infinite;
 }
 
 

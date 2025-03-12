@@ -25,7 +25,7 @@ const Company = () => {
       const fetchDataNopublic =  async() => {
         try {
           setLoading(true)
-          const response = await fetch("http://localhost:5100/companies/no_public")
+          const response = await fetch("http://localhost:3000/companies/no_public")
           if(!response.ok){
             throw new Error("unable to fetch companies data");
           }
@@ -42,7 +42,7 @@ const Company = () => {
       const fetchDatapublic =  async() => {
         try {
           setLoading(true)
-          const response = await fetch("http://localhost:5100/companies/public")
+          const response = await fetch("http://localhost:3000/companies/public")
           if(!response.ok){
             throw new Error("unable to fetch companies data");
           }
@@ -60,7 +60,7 @@ const Company = () => {
         e.preventDefault()
             try {
               setLoading(true)
-                const response = await fetch(`http://localhost:5100/public-comapanies/data/${publicInput}`)
+                const response = await fetch(`http://localhost:3000/public-comapanies/data/${publicInput}`)
                 if(!response.ok){
                   throw new Error("unable to fetch companies data");
                 }
@@ -73,11 +73,54 @@ const Company = () => {
                alert("an error occured", error.message)
             }
       }
+      const sortPrivate = async()=>{
+    
+            try {
+              setLoading(true)
+              setTimeout(() => {
+                setLoading(false)
+              }, 2000);
+                const response = await fetch(`http://localhost:3000/sorted/private-comapanies`)
+                if(!response.ok){
+                  throw new Error("unable to fetch companies data");
+                }
+                const data = await response.json()
+                console.log(data.data)
+                 
+                setCompany(Array.isArray(data.data) ? data.data : [])
+
+            } catch (error) {
+               alert("an error occured", error.message)
+            }
+      }
+      const sortPublic = async()=>{
+        
+            try {
+              setLoading(true)
+              setTimeout(() => {
+                setLoading(false)
+              }, 2000);
+                const response = await fetch(`http://localhost:3000/sorted/public-comapanies`)
+                if(!response.ok){
+                  throw new Error("unable to fetch companies data");
+                }
+                const data = await response.json()
+                console.log(data.data)
+                
+                setCompany(Array.isArray(data.data) ? data.data : [])
+
+            } catch (error) {
+               alert("an error occured", error.message)
+            }
+      }
       const privateSubmit = async (e) => {
         e.preventDefault()
         try {
           setLoading(true)
-            const response = await fetch(`http://localhost:5100/private-comapanies/data/${privateInput}`)
+          setTimeout(() => {
+            setLoading(false)
+          }, 2000);
+            const response = await fetch(`http://localhost:3000/private-comapanies/data/${privateInput}`)
             if(!response.ok){
               throw new Error("unable to fetch companies data");
             }
@@ -129,25 +172,31 @@ const Company = () => {
 </div>
 :    
 <div className="company_content container">
-  {privPub === "private" ?<form onSubmit={privateSubmit}  className="private form">
+  {privPub === "private" ?<><form onSubmit={privateSubmit}  className="private form">
           <input onChange={(e)=>{setPrivateInput(e.target.value)}} type="text" placeholder="search for private company" />
           <button type="submit">
             <i className="fa fa-search" aria-hidden="true"></i>
           </button>
-        </form>:
-        <form onSubmit={publicSubmit} className="public form">
+        </form><div className="sort">
+          <h3>Sort By</h3>
+        <span onClick={sortPrivate}> Ratings <i class="fas fa-fire"></i></span>
+        </div></>:
+        <><form onSubmit={publicSubmit} className="public form">
         <input onChange={(e)=>{setPublicInput(e.target.value)}} type="text" placeholder="search for public company" />
         <button type="submit">
           <i className="fa fa-search" aria-hidden="true"></i>
         </button>
-      </form>}
+      </form><div className="sort">
+          <h3>Sort By</h3>
+          <span onClick={sortPublic}> Ratings <i class="fas fa-fire"></i></span>
+        </div></>}
 
 {company.length > 0 ? company.map((item, index)=>(
 <div key={item.id} className='card'>
   {/* {images.map((a,i)=>(
       <img src={a} alt="" />
   ))} */}
-  <img src={images[index]} alt="" />
+  <div className="companyImage"><img src={images[index]} alt="" /></div>
   <div className="text">
     <h2>{item.name}</h2>
     <p>{item.industry}</p>

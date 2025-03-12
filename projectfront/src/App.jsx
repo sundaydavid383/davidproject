@@ -9,7 +9,7 @@ const App = () => {
     
   const fetchData =  async() => {
     try {
-      const response = await fetch("http://localhost:5100/companies")
+      const response = await fetch("http://localhost:3000/companies")
       if(!response.ok){
         throw new Error("unable to fetch companies data");
       }

@@ -85,7 +85,7 @@ const Footer = () => {
       <div className="main_footer container">
         <div className="main futup">
         <div className="logo">
-          <span>c</span>OMPANY<i className="fa-solid fa-building"></i>
+          <span>AB</span>NATIONS<i className="fa-solid fa-building"></i>
         </div>
           <p>
             At Newspring Tim412, we are dedicated to guiding youth towards a

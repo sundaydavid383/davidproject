@@ -1161,8 +1161,17 @@ app.get("/private-comapanies/data/:search", (req, res)=>{
 
 app.get("/sorted/private-comapanies", (req, res)=>{
     try {
-        const companies = nopublicData.filter((a,b)=> a.employees - b.employees)
-        res.status(200).json({data:companies})  
+        const compnaies = nopublicData.sort((a,b)=> b.employees - a.employees) 
+        return res.status(200).json({data:compnaies})
+    } catch (error) {
+     console.log("error occured:",error)
+    }
+
+})
+app.get("/sorted/public-comapanies", (req, res)=>{
+    try {
+       const companies = publicData.sort((a,b)=> b.employees - a.employees)
+       return res.status(200).json({data:companies})
     } catch (error) {
      console.log("error occured:",error)
     }
@@ -1172,6 +1181,6 @@ app.get("/sorted/private-comapanies", (req, res)=>{
 
 
 //i am listening
-app.listen(5100, ()=>{
-    console.log("server currently running on port 5000...")
+app.listen(3000, ()=>{
+    console.log("server currently running on port 3000...")
 })

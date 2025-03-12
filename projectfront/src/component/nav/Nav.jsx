@@ -6,7 +6,7 @@ const Nav = () => {
     <div className="nav">
       <div className="navupper">
         <div className="logo">
-          <span>c</span>OMPANY<i className="fa-solid fa-building"></i>
+          <span>AB</span>NATIONS<i className="fa-solid fa-building"></i>
         </div>
         <form action="" className="form">
           <input type="text" placeholder="search for company" />
