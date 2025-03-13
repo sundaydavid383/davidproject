@@ -3,12 +3,13 @@
     flex-wrap: wrap;
     gap: 0rem;
     padding-block: 4rem;
+    justify-content: space-around;
 }
 .feature{
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 17rem;
+    width: 22rem;
     text-align: center;
     transition: .3s linear;
 }

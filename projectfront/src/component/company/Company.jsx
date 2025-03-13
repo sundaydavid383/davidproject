@@ -17,6 +17,9 @@ const Company = () => {
     const [company, setCompany] = useState([])
     const [loading, setLoading] = useState(false)
     const [privPub, setPrivPub] = useState("public")
+    const [applied, setApplied] = useState(false)
+    const [companyName, setCompanyName] = useState([])
+    const [filteredName, setFilteredName] = useState([])
     const [publicInput, setPublicInput] = useState("")
     const [privateInput, setPrivateInput] = useState("")
     const images = [image1, image2, image3, image4, image5, image6, image7, image8, image9, image10, image1, image2, image3, image4, image5, image6, image7, image8, image9, image10, image1, image2, image3, image4, image5, image6, image7, image8, image9, image10, image1, image2, image3, image4, image5, image6, image7, image8, image9, image10, image1, image2, image3, image4, image5, image6, image7, image8, image9, image10];
@@ -31,8 +34,10 @@ const Company = () => {
           }
           const data = await response.json()
           setLoading(false)
+          setPrivateInput("")
           console.log(data.data)
-          setCompany(Array.isArray(data.data) ? data.data : [])
+          setCompanyName(Array.isArray(data.data) ? data.data.map(obj=>obj.name) : [])
+          console.log("company name:", companyName)
         } catch (error) {
           setLoading(false)
            alert("unable to fetch data", error.message)
@@ -48,8 +53,11 @@ const Company = () => {
           }
           const data = await response.json()
           console.log(data.data)
+          setPublicInput("")
            setLoading(false)
           setCompany(Array.isArray(data.data) ? data.data : [])
+          setCompanyName(Array.isArray(data.data) ? data.data.map(obj=>obj.name) : [])
+          console.log("company name:", companyName)
         } catch (error) {
           setLoading(false)
            alert("unable to fetch data", error.message)
@@ -68,6 +76,8 @@ const Company = () => {
                 console.log(data.data)
                  setLoading(false)
                 setCompany(Array.isArray(data.data) ? data.data : [])
+                setCompanyName(Array.isArray(data.data) ? data.data.map(obj=>obj.name) : [])
+                console.log("company name:", companyName)
 
             } catch (error) {
                alert("an error occured", error.message)
@@ -86,8 +96,9 @@ const Company = () => {
                 }
                 const data = await response.json()
                 console.log(data.data)
-                 
+                 setPrivateInput("")
                 setCompany(Array.isArray(data.data) ? data.data : [])
+              
 
             } catch (error) {
                alert("an error occured", error.message)
@@ -105,14 +116,26 @@ const Company = () => {
                   throw new Error("unable to fetch companies data");
                 }
                 const data = await response.json()
+                setPublicInput("")
                 console.log(data.data)
                 
+                
                 setCompany(Array.isArray(data.data) ? data.data : [])
+              
 
             } catch (error) {
                alert("an error occured", error.message)
             }
       }
+
+
+       const filterName = (input)=>{
+            let  filterName = companyName.filter(name=>name.toLowerCase().includes(input.toLowerCase()))
+            setFilteredName(filterName)
+            console.log(filteredName)
+       }
+
+
       const privateSubmit = async (e) => {
         e.preventDefault()
         try {
@@ -138,6 +161,18 @@ const Company = () => {
         fetchDatapublic()
       }, [])
       
+
+
+const filteredNameComp = (state) => {
+  return (
+      <ul className="filtered_name">
+        <i onClick={()=>{document.querySelector(".filtered_name").classList.remove("active")}} className='fa-solid fa-times'></i>
+        {filteredName.map((name, idx)=>(
+          <li onClick={()=>{state(name); setFilteredName([]); document.querySelector(".filtered_name").classList.remove("active")}} key={idx}>{name}</li>
+        ))}
+      </ul>
+  )
+}
 
      
 
@@ -172,24 +207,27 @@ const Company = () => {
 </div>
 :    
 <div className="company_content container">
-  {privPub === "private" ?<><form onSubmit={privateSubmit}  className="private form">
-          <input onChange={(e)=>{setPrivateInput(e.target.value)}} type="text" placeholder="search for private company" />
+{privPub === "private" ?
+       <div className='header_of_section'><form onSubmit={privateSubmit}  className="private form">
+          <input value={privateInput} onChange={(e)=>{setPrivateInput(e.target.value); filterName(e.target.value); document.querySelector(".filtered_name").classList.add("active")}} type="text" placeholder="search for private company" />
           <button type="submit">
             <i className="fa fa-search" aria-hidden="true"></i>
           </button>
         </form><div className="sort">
           <h3>Sort By</h3>
         <span onClick={sortPrivate}> Ratings <i class="fas fa-fire"></i></span>
-        </div></>:
-        <><form onSubmit={publicSubmit} className="public form">
-        <input onChange={(e)=>{setPublicInput(e.target.value)}} type="text" placeholder="search for public company" />
+        </div>{filteredNameComp(setPrivateInput)}</div>:
+        <div className='header_of_section'><form onSubmit={publicSubmit} className="public form">
+        <input value={publicInput} onChange={(e)=>{setPublicInput(e.target.value); ; filterName(e.target.value); document.querySelector(".filtered_name").classList.add("active")}} type="text" placeholder="search for public company" />
         <button type="submit">
           <i className="fa fa-search" aria-hidden="true"></i>
         </button>
       </form><div className="sort">
           <h3>Sort By</h3>
           <span onClick={sortPublic}> Ratings <i class="fas fa-fire"></i></span>
-        </div></>}
+        </div>{filteredNameComp(setPublicInput)}</div>}
+
+      
 
 {company.length > 0 ? company.map((item, index)=>(
 <div key={item.id} className='card'>
@@ -200,11 +238,15 @@ const Company = () => {
   <div className="text">
     <h2>{item.name}</h2>
     <p>{item.industry}</p>
+    <div className="chip_text">
+    <div className="applicants">they have {item.applications} applicant</div>
     <div className="employees">No of Employees: <span>{item.employees}</span></div>
     <div className="details">
       <div className="public">
         {item.is_public ? "it is publicly avialabel":"it is specifically for certified users"}
       </div>
+    </div>
+   
       <div className="stars">
        {
         (()=>{
@@ -226,7 +268,7 @@ const Company = () => {
         <div className="city"><i class="fa-solid fa-flag"></i> {item.location.city}</div>
         <div className="country"><i class="fa-solid fa-city"></i>{item.location.country}</div>
       </div>
-      <button onClick={()=>{}} className="btn">Apply</button>
+      <button onClick={()=>{ setApplied(prev=>!prev); item.applied = true}} className="btn">{item.applied?"Applied":"Apply"}</button>
     </div>
   </div>
 </div>

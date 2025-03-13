@@ -1,12 +1,12 @@
 const express = require("express")
-const {readFileSync, writeFileSync} = require("fs")
+
 const app = express()
-const bcrypt = require("bcryptjs")
+
 const cors = require("cors")
 
 
 
-const data = [
+let data = [
     {
     "id": "bf4eb4a1-e6d8-4cc6-8279-441097df3885",
     "name": "Ziemann, Fahey and Tromp",
@@ -1108,6 +1108,8 @@ const data = [
     "is_public": true
     }
     ]
+    const apply = {applied:false, applications:0}
+     data = data.map((obj)=>({...obj, ...apply}))
  const nopublicData = data.filter((company)=> company.is_public == false)
  const publicData = data.filter((company)=> company.is_public == true)
 
@@ -1128,14 +1130,29 @@ app.use(cors({
 
 //endpoint definition
 app.get("/companies", (req, res)=>{
-    return res.status(200).json({data:data})
+    try {
+        return res.status(200).json({data:data})
+    } catch (error) {
+         console.log("error :",error)
+    }
+   
 })
 
 app.get("/companies/no_public", (req, res)=>{
-    return res.status(200).json({data:nopublicData})
+    try {
+        return res.status(200).json({data:nopublicData})
+    } catch (error) {
+         return console.log("error :",error)
+    }
+    
 })
 app.get("/companies/public", (req, res)=>{
-    return res.status(200).json({data:publicData})
+    try {
+        return res.status(200).json({data:publicData})
+    } catch (error) {
+         console.log("error :",error)
+    }
+   
 })
 app.get("/public-comapanies/data/:search", (req, res)=>{
     try {

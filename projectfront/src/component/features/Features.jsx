@@ -14,11 +14,7 @@ const Features = () => {
     <h3>Employer Transparency</h3>
     <p>Provide insights into company recruiting practices, highlighting employers who maintain timely communication and preparedness during interviews, thereby promoting a positive candidate experience.</p>
   </div>
-  <div class="feature">
-    <i class="fa fa-industry" aria-hidden="true"></i>
-    <h3>Industry-Specific Job Boards</h3>
-    <p>Create dedicated sections for niche industries, catering to specialized job seekers by offering tailored job listings and resources relevant to specific fields.</p>
-  </div>
+ 
   <div class="feature">
     <i class="fa fa-user-secret" aria-hidden="true"></i>
     <h3>Anonymous Job Browsing</h3>

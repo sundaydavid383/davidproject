@@ -3,7 +3,8 @@ import Nav from './component/nav/Nav'
 import Hero from './component/hero/Hero'
 import Footer from './component/footer/Footer'
 import Features from './component/features/Features'
-import Company from './component/company/company'
+import Company from './component/company/Company'
+import "./App.css"
 
 const App = () => {
     
@@ -22,6 +23,14 @@ const App = () => {
   useEffect(() => {
     fetchData()
   }, [])
+
+  const goUp = ()=>{
+    window.scrollTo({
+      top:0,
+      left:0,
+    behavior:"smooth"   
+  })
+  }
   
    
   return (
@@ -31,6 +40,9 @@ const App = () => {
     <Features/>
     <Company/>
     <Footer/>
+    <div onClick={()=>goUp()}  className="up">
+    <i className="fa-solid fa-arrow-up"></i>
+</div>
     </div>
   )
 }
