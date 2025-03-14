@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import image1 from "../../assets/image1.jpg"
 import image2 from "../../assets/image2.jpg"
 import image3 from "../../assets/image3.jpg"
@@ -23,7 +23,7 @@ const Company = () => {
     const [publicInput, setPublicInput] = useState("")
     const [privateInput, setPrivateInput] = useState("")
     const images = [image1, image2, image3, image4, image5, image6, image7, image8, image9, image10, image1, image2, image3, image4, image5, image6, image7, image8, image9, image10, image1, image2, image3, image4, image5, image6, image7, image8, image9, image10, image1, image2, image3, image4, image5, image6, image7, image8, image9, image10, image1, image2, image3, image4, image5, image6, image7, image8, image9, image10];
-    
+    const observer = useRef(null)
         
       const fetchDataNopublic =  async() => {
         try {
@@ -43,7 +43,6 @@ const Company = () => {
            alert("unable to fetch data", error.message)
         }
       }
-
       const fetchDatapublic =  async() => {
         try {
           setLoading(true)
@@ -63,7 +62,6 @@ const Company = () => {
            alert("unable to fetch data", error.message)
         }
       }
-
       const publicSubmit = async(e)=>{
         e.preventDefault()
             try {
@@ -127,15 +125,11 @@ const Company = () => {
                alert("an error occured", error.message)
             }
       }
-
-
        const filterName = (input)=>{
             let  filterName = companyName.filter(name=>name.toLowerCase().includes(input.toLowerCase()))
             setFilteredName(filterName)
             console.log(filteredName)
        }
-
-
       const privateSubmit = async (e) => {
         e.preventDefault()
         try {
@@ -156,10 +150,27 @@ const Company = () => {
            alert("an error occured", error.message)
         }
       }
-
       useEffect(() => {
-        fetchDatapublic()
-      }, [])
+        fetchDatapublic();
+      
+        observer.current = new IntersectionObserver((entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("animation");
+              observer.current.unobserve(entry.target); // Unobserve after adding animation
+            }
+          });
+        }, { threshold: 0.2 });
+      
+        document.querySelectorAll(".anime").forEach(el => observer.current.observe(el));
+      
+        return () => {
+          if (observer.current) {
+            document.querySelectorAll(".anime").forEach(el => observer.current.unobserve(el));
+            observer.current.disconnect();
+          }
+        };
+      }, []);
       
 
 
@@ -187,7 +198,7 @@ const filteredNameComp = (state) => {
   loading ? 
   <div className="loading container"> 
     {[...Array(10)].map((a,i)=>(
-      <div className="card">
+      <div key={i} className="card">
         <div className="image"></div>
         <div className="lines">
         <div className="line"></div>
@@ -230,7 +241,7 @@ const filteredNameComp = (state) => {
       
 
 {company.length > 0 ? company.map((item, index)=>(
-<div key={item.id} className='card'>
+<div key={item.id}  className='card anime'>
   {/* {images.map((a,i)=>(
       <img src={a} alt="" />
   ))} */}

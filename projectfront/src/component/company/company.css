@@ -34,6 +34,9 @@
      overflow-y: scroll;
      padding-bottom: 4rem;
 }
+.company_content::placeholder{
+    color: rgb(236, 228, 228)
+}
 .company_content::-webkit-scrollbar{
     width: 1rem;
     background: rgba(149, 172, 233,.2);
@@ -374,7 +377,9 @@
 .loading .card .line::after{
     animation: loading 2.7s .2s infinite;
 }
-
+.company_content .card.anime.animation{
+    animation: riseup 2s .4s forwards;
+}
 
 
 @keyframes loading {

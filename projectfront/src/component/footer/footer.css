@@ -130,6 +130,12 @@
     color: var(--white-color);
     justify-content: space-between;
   }
+  .footer .futup{
+    opacity: 0;
+  }
+  .footer .futup.active{
+    animation: riseup 2s .4s forwards;
+  }
 
   .footer .main p {
     font-weight: 300;

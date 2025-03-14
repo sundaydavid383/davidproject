@@ -25,6 +25,7 @@ const Footer = () => {
       }
     };
   }, []);
+  
   const onSubmit = (e)=>{
     const updateReciever = document.querySelector(".updateReciever")
     const emailLb = document.getElementById("emailLb");

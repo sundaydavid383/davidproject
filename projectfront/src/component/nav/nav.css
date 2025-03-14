@@ -14,7 +14,7 @@
   justify-content: space-between;
   align-items: center;
   border-bottom: 1px solid var(--gray);
-  padding-block: 1rem;
+  padding-block: .5rem;
 }
  .logo {
   display: flex;
@@ -114,7 +114,7 @@
     display: flex;
     align-items: center;
     justify-content: space-around;
-    padding-block: 1rem;
+    padding-block: .7rem;
     font-size: 1rem;
     font-weight: 400;
     text-align: center;
