@@ -35,7 +35,7 @@
      padding-bottom: 4rem;
 }
 .company_content::placeholder{
-    color: rgb(236, 228, 228)
+    color: rgb(248, 238, 238)
 }
 .company_content::-webkit-scrollbar{
     width: 1rem;
